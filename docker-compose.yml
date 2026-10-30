@@ -1,0 +1,11 @@
+services:
+  gateway:
+    build: .
+    ports: ["127.0.0.1:8787:8787"]   # bind to loopback; put a TLS reverse proxy in front for remote use
+    env_file: .env
+    volumes:
+      - ./deccanxai.config.json:/config/deccanxai.config.json:ro
+    restart: unless-stopped
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]

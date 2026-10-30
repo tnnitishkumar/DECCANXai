@@ -1,0 +1,29 @@
+{
+  "name": "deccanxai",
+  "version": "0.1.0-alpha.0",
+  "private": true,
+  "description": "DECCANXAI - One Intelligence. Multiple Models. Autonomous Execution.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "imports": {
+    "#shared": "./packages/shared-types/src/index.ts",
+    "#adapters": "./packages/provider-adapters/src/index.ts",
+    "#registry": "./services/model-registry/src/index.ts",
+    "#usage": "./services/usage-monitor/src/index.ts",
+    "#router": "./services/router/src/index.ts",
+    "#gateway": "./services/gateway/src/index.ts",
+    "#security": "./packages/security/src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "node --test \"packages/**/*.test.ts\" \"services/**/*.test.ts\" \"tests/**/*.test.ts\"",
+    "start": "node services/gateway/src/main.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.6.0"
+  }
+}

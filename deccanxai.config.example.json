@@ -1,0 +1,51 @@
+{
+  "host": "127.0.0.1",
+  "port": 8787,
+  "weightProfile": "premiumFirst",
+  "rateLimitPerMinute": 120,
+  "providers": [
+    {
+      "id": "openai",
+      "baseUrl": "https://api.openai.com/v1",
+      "apiKeyEnv": "OPENAI_API_KEY",
+      "priority": 0.8
+    },
+    {
+      "id": "ollama",
+      "baseUrl": "http://127.0.0.1:11434/v1",
+      "priority": 0.2
+    }
+  ],
+  "qualityRules": [
+    {
+      "pattern": "^openai/",
+      "tier": 0.9
+    },
+    {
+      "pattern": "^ollama/",
+      "tier": 0.4
+    }
+  ],
+  "budgets": [
+    {
+      "id": "monthly-openai",
+      "scope": {
+        "provider": "openai"
+      },
+      "window": "month",
+      "maxCostUsd": 25
+    },
+    {
+      "id": "daily-requests",
+      "scope": {},
+      "window": "day",
+      "maxRequests": 5000
+    }
+  ],
+  "retry": {
+    "maxAttemptsPerCandidate": 2,
+    "baseDelayMs": 200,
+    "maxDelayMs": 5000
+  },
+  "probeOnStart": []
+}
